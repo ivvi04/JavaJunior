@@ -7,8 +7,6 @@ import java.lang.reflect.Field;
 import java.util.UUID;
 
 public class QueryBuilder {
-
-
     /**
      * Построить запрос на добавление данных в БД
      *
@@ -45,9 +43,9 @@ public class QueryBuilder {
             if (query.charAt(query.length() - 2) == ',') query.delete(query.length() - 2, query.length());
 
             query.append(")");
-        } else return "";
 
-        return query.toString();
+            return query.toString();
+        } else return "";
     }
 
     /**
@@ -72,12 +70,10 @@ public class QueryBuilder {
                         query.append(columnAnnotation.name()).append(" = '").append(primaryKey).append("'");
                         break;
                     }
-
                 }
             }
-
+            return query.toString();
         } else return "";
-        return query.toString();
     }
 
     /**
@@ -118,10 +114,8 @@ public class QueryBuilder {
                     }
                 }
             }
-
+            return query.toString();
         } else return "";
-
-        return query.toString();
     }
 
     /**
@@ -137,20 +131,19 @@ public class QueryBuilder {
         if (clazz.isAnnotationPresent(Table.class)) {
             Table tableAnnotation = clazz.getAnnotation(Table.class);
             query.append(tableAnnotation.name()).append(" WHERE ");
-        }
 
-        Field[] fields = clazz.getDeclaredFields();
-        for (Field field : fields) {
-            if (field.isAnnotationPresent(Column.class)) {
-                field.setAccessible(true);
-                Column columnAnnotation = field.getAnnotation(Column.class);
-                if (columnAnnotation.primaryKey()) {
-                    query.append(columnAnnotation.name()).append(" = ").append(primaryKey);
-                    break;
+            Field[] fields = clazz.getDeclaredFields();
+            for (Field field : fields) {
+                if (field.isAnnotationPresent(Column.class)) {
+                    field.setAccessible(true);
+                    Column columnAnnotation = field.getAnnotation(Column.class);
+                    if (columnAnnotation.primaryKey()) {
+                        query.append(columnAnnotation.name()).append(" = ").append(primaryKey);
+                        break;
+                    }
                 }
             }
-        }
-
-        return query.toString();
+            return query.toString();
+        } else return "";
     }
 }
