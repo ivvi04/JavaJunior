@@ -1,4 +1,4 @@
-package ru.lakeevda.lesson2.task1.classes;
+package ru.lakeevda.lesson2.task1.animal.classes;
 
 public abstract class Animal {
     private String name;

@@ -1,9 +1,9 @@
 package ru.lakeevda.lesson2.task1;
 
-import ru.lakeevda.lesson2.task1.classes.Animal;
-import ru.lakeevda.lesson2.task1.classes.Cat;
-import ru.lakeevda.lesson2.task1.classes.Dog;
-import ru.lakeevda.lesson2.task1.enums.Gender;
+import ru.lakeevda.lesson2.task1.animal.classes.Animal;
+import ru.lakeevda.lesson2.task1.animal.classes.Cat;
+import ru.lakeevda.lesson2.task1.animal.classes.Dog;
+import ru.lakeevda.lesson2.task1.animal.enums.Gender;
 
 import java.lang.reflect.Method;
 

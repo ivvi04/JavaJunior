@@ -1,6 +1,6 @@
-package ru.lakeevda.lesson2.task1.classes;
+package ru.lakeevda.lesson2.task1.animal.classes;
 
-import ru.lakeevda.lesson2.task1.enums.Gender;
+import ru.lakeevda.lesson2.task1.animal.enums.Gender;
 
 public class Cat extends Animal {
     Gender gender;
