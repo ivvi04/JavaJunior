@@ -15,9 +15,9 @@ public class Main {
         List<Student> studentList;
 
         try (FileService<Student> fileService = new FileService<>(Student.class);) {
-            File file = new File(fileService.getFileName(FileExtension.FILE_JSON.getExtension()));
+            File file = new File(fileService.getFileName(FileExtension.FILE_JSON));
             if (file.exists() && !file.isDirectory())
-                studentList = fileService.loadFromFile(FileExtension.FILE_JSON.getExtension());
+                studentList = fileService.loadFromFile(FileExtension.FILE_JSON);
             else studentList = initStudentList();
         }
 
@@ -28,9 +28,9 @@ public class Main {
         }
 
         try (FileService<Student> fileService = new FileService<>(Student.class);) {
-            fileService.saveToFile(FileExtension.FILE_JSON.getExtension(), studentList);
-            fileService.saveToFile(FileExtension.FILE_BIN.getExtension(), studentList);
-            fileService.saveToFile(FileExtension.FILE_XML.getExtension(), studentList);
+            fileService.saveToFile(FileExtension.FILE_JSON, studentList);
+            fileService.saveToFile(FileExtension.FILE_BIN, studentList);
+            fileService.saveToFile(FileExtension.FILE_XML, studentList);
         }
     }
 

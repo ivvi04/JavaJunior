@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import ru.lakeevda.lesson3.task2.enums.FileExtension;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,27 +24,31 @@ public class FileService<T> implements Closeable {
         this.type = type;
     }
 
-    public String getFileName(String fileExtension) {
-        return this.path + this.type.getSimpleName() + "." + fileExtension;
+    public String getFileName(FileExtension fileExtension) {
+        return this.path + this.type.getSimpleName() + "." + fileExtension.getExtension();
     }
 
-    public void saveToFile(String fileExtension, List<T> list) {
+    public void saveToFile(FileExtension fileExtension, List<T> list) {
         String fileName = getFileName(fileExtension);
         try {
-            if (fileName.endsWith(".json")) {
-                this.objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-                this.objectMapper.writeValue(new File(fileName), list);
-            } else if (fileName.endsWith(".bin")) {
-                try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
-                    objectOutputStream.writeObject(list);
+            switch (fileExtension) {
+                case FILE_JSON -> {
+                    this.objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+                    this.objectMapper.writeValue(new File(fileName), list);
                 }
-            } else if (fileName.endsWith(".xml")) this.xmlMapper.writeValue(new File(fileName), list);
+                case FILE_BIN -> {
+                    try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
+                        objectOutputStream.writeObject(list);
+                    }
+                }
+                case FILE_XML -> this.xmlMapper.writeValue(new File(fileName), list);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public List<T> loadFromFile(String fileExtension) {
+    public List<T> loadFromFile(FileExtension fileExtension) {
         List<T> list = new ArrayList<>();
         String fileName = getFileName(fileExtension);
         File file = new File(fileName);
@@ -51,12 +56,15 @@ public class FileService<T> implements Closeable {
             TypeFactory typeFactory = TypeFactory.defaultInstance();
             CollectionType collectionType = typeFactory.constructCollectionType(ArrayList.class, type);
             try {
-                if (fileName.endsWith(".json")) list = this.objectMapper.readValue(file, collectionType);
-                else if (fileName.endsWith(".bin")) {
-                    try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
-                        list = (List<T>) objectInputStream.readObject();
+                switch (fileExtension) {
+                    case FILE_JSON -> list = this.objectMapper.readValue(file, collectionType);
+                    case FILE_BIN -> {
+                        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
+                            list = (List<T>) objectInputStream.readObject();
+                        }
                     }
-                } else if (fileName.endsWith(".xml")) list = this.xmlMapper.readValue(file, collectionType);
+                    case FILE_XML -> list = this.xmlMapper.readValue(file, collectionType);
+                }
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
