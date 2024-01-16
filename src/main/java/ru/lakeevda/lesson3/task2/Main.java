@@ -16,7 +16,8 @@ public class Main {
 
         try (FileService<Student> fileService = new FileService<>(Student.class);) {
             File file = new File(fileService.getFileName(FileExtension.FILE_JSON.getExtension()));
-            if (file.exists() && !file.isDirectory()) studentList = fileService.loadFromFile(FileExtension.FILE_JSON.getExtension());
+            if (file.exists() && !file.isDirectory())
+                studentList = fileService.loadFromFile(FileExtension.FILE_JSON.getExtension());
             else studentList = initStudentList();
         }
 

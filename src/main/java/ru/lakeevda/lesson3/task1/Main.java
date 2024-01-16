@@ -7,7 +7,7 @@ import java.io.*;
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        String fileName = "./data/student.data";
+        String fileName = "./data/Student.bin";
         Student student1 = new Student("Денис", 34, 4.0);
         Student student2 = new Student("Анна", 32, 4.6);
 
