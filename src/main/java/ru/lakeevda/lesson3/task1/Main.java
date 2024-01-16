@@ -1,5 +1,7 @@
 package ru.lakeevda.lesson3.task1;
 
+import ru.lakeevda.lesson3.task1.entity.Student;
+
 import java.io.*;
 
 public class Main {

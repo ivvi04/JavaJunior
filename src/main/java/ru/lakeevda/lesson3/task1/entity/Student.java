@@ -1,4 +1,4 @@
-package ru.lakeevda.lesson3.task1;
+package ru.lakeevda.lesson3.task1.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

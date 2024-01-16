@@ -1,7 +1,7 @@
 package ru.lakeevda.lesson3.task2;
 
-import ru.lakeevda.lesson3.task2.student.entity.Student;
-import ru.lakeevda.lesson3.task2.student.services.FileService;
+import ru.lakeevda.lesson3.task2.entity.Student;
+import ru.lakeevda.lesson3.task2.service.FileService;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,10 +1,10 @@
-package ru.lakeevda.lesson3.task2.student.services;
+package ru.lakeevda.lesson3.task2.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import ru.lakeevda.lesson3.task2.student.entity.Student;
+import ru.lakeevda.lesson3.task2.entity.Student;
 
 import java.io.*;
 import java.util.ArrayList;
