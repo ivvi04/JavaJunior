@@ -1,6 +1,7 @@
 package ru.lakeevda.lesson3.task2;
 
 import ru.lakeevda.lesson3.task2.entity.Student;
+import ru.lakeevda.lesson3.task2.enums.FileExtension;
 import ru.lakeevda.lesson3.task2.service.FileService;
 
 import java.io.File;
@@ -9,16 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static String FILE_JSON = "./data/student.json";
-    public static String FILE_XML = "./data/student.xml";
-    public static String FILE_BIN = "./data/student.bin";
 
     public static void main(String[] args) throws IOException {
         List<Student> studentList;
 
-        try (FileService fileService = new FileService();) {
-            File file = new File(FILE_JSON);
-            if (file.exists() && !file.isDirectory()) studentList = fileService.loadFromFile(FILE_JSON);
+        try (FileService<Student> fileService = new FileService<>(Student.class);) {
+            File file = new File(fileService.getFileName(FileExtension.FILE_JSON.getExtension()));
+            if (file.exists() && !file.isDirectory()) studentList = fileService.loadFromFile(FileExtension.FILE_JSON.getExtension());
             else studentList = initStudentList();
         }
 
@@ -28,10 +26,10 @@ public class Main {
             System.out.println("Средний бал: " + student.getGPA());
         }
 
-        try (FileService fileService = new FileService();) {
-            fileService.saveToFile(FILE_JSON, studentList);
-            fileService.saveToFile(FILE_BIN, studentList);
-            fileService.saveToFile(FILE_XML, studentList);
+        try (FileService<Student> fileService = new FileService<>(Student.class);) {
+            fileService.saveToFile(FileExtension.FILE_JSON.getExtension(), studentList);
+            fileService.saveToFile(FileExtension.FILE_BIN.getExtension(), studentList);
+            fileService.saveToFile(FileExtension.FILE_XML.getExtension(), studentList);
         }
     }
 
