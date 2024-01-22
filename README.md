@@ -58,7 +58,7 @@
 
 ## Урок 4. Базы данных и инструменты взаимодействия с ними
 
-**[Задание 1](https://github.com/ivvi04/JavaJunior/tree/master/src/main/java/ru/lakeevda/lesson4)**
+**[Задание](https://github.com/ivvi04/JavaJunior/tree/master/src/main/java/ru/lakeevda/lesson4)**
 
 Создайте базу данных (например, SchoolDB).
 
